@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Stilurile tale aici */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to top, #89f7fe, #66a6ff);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.weather-app {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+}
+
+.input-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#city-input {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 25px;
+  width: 60%;
+  font-size: 12px;
+  color: #333;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+#city-input::placeholder {
+  color: #888;
+}
+
+#search-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: #4facfe;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#search-btn:hover {
+  background-color: #00f2fe;
+}
+
+.hidden {
+  display: none;
+}
+
+#error {
+  color: #ffcccc;
+  background: #660000;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.weather-info p {
+  margin: 8px 0;
+  font-size: 18px;
+}

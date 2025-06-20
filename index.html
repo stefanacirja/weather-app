@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <!-- Meta tags aici -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <!-- Link-uri către CSS și JS -->
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./app.js" type="module" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Structura ta aici -->
+       <div class="weather-app">
+
+            <!-- Input + Buton -->
+            <div class="input-container">
+                <input type="text" id="city-input" placeholder="Introdu numele orașului">
+                <button id="search-btn">Caută</button>
+            </div>
+
+            <!-- Zonă Loading -->
+            <div id="loading" class="hidden">Se încarcă...</div>
+
+            <!-- Zonă Eroare -->
+            <div id="error" class="error-message hidden"></div>
+
+            <!-- Zonă Afișare Vreme -->
+            <div id="weather-display" class="weather-info hidden">
+                <h2 id="city-name">Oraș</h2>
+                <p>🌡️ Temperatură: <span id="temperature"></span>°C</p>
+                <p>💧 Umiditate: <span id="humidity"></span>%</p>
+                <p>🌬️ Vânt: <span id="wind"></span> km/h</p>
+                <p>🌅 Răsărit: <span id="sunrise"></span></p>
+                <p>🌇 Apus: <span id="sunset"></span></p>
+                <p>⛅ Descriere: <span id="description"></span></p>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
