@@ -1,35 +1,58 @@
-export const getCurrentWeather = async (city) => {
-  try {
-    // Simulează întârzierea unui apel API (~1 sec)
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+import {CONFIG, API_ENDPOINTS} from './config.js';
 
-    return import('./config.js').then((config) => {
-        const data = {...config.MOCK_DATA, name: city };
-        return {
-            city: data.name,
-            temperature: Math.round(data.main.temp),
-            humidity: data.main.humidity,
-            wind: Math.round(data.wind.speed * 3.6),
-            sunrise: "N/A",
-            sunset: "N/A",
-            description: data.weather[0].description
-        }
-    })
+const buildUrl = (endpoint, params) => {
+    const url = new URL(`${CONFIG.API_URL}${endpoint}`);
+    url.searchParams.set('appid', CONFIG.API_KEY);
+    url.searchParams.set('lang', CONFIG.DEFAULT_LANG);
+    url.searchParams.set('units', CONFIG.DEFAULT_UNITS);
 
-  } catch (error) {
-    console.error("Eroare la obținerea vremii pentru oraș:", error);
-    throw new Error("Nu s-au putut obține datele meteo.");
-  }
+    for (const [key, value] of Object.entries(params)) {
+        url.searchParams.set(key, value);
+    }
+
+    return url.toString();
+}
+
+
+export const getCurrentWeather = async (city = CONFIG.DEFAULT_CITY) => {
+    try {
+        const url = buildUrl(API_ENDPOINTS.WEATHER, {
+            q: city
+        })
+        return await fetch(url)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Eroare la trimiterea request-ului')
+                }
+
+                return res.json();
+            }).then(data => {
+                const sunrise = new Date(data.sys.sunrise + 1000);
+                const sunset = new Date(data.sys.sunset + 1000);
+
+                return {
+                    city: data.name,
+                    temperature: Math.round(data.main.temp),
+                    humidity: data.main.humidity,
+                    wind: Math.round(data.wind.speed * 3.6),
+                    sunrise: `${sunrise.getHours()}:${sunrise.getMinutes()}:${sunrise.getSeconds()}`,
+                    sunset: `${sunset.getHours()}:${sunset.getMinutes()}:${sunset.getSeconds()}`,
+                    description: data.weather[0].description,
+                    icon: data.weather[0].icon
+                }
+            });
+
+    } catch (error) {
+        console.error("Eroare la obținerea vremii pentru oraș:", error);
+        throw new Error("Nu s-au putut obține datele meteo.");
+    }
 };
 
 export const getWeatherByCoords = async (lat, lon) => {
   try {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    // MOCK DATA – poți genera date diferite în funcție de lat/lon
-    return import('./config.js').then((config) => {
-        return {...config.MOCK_DATA, city: `Coord: ${lat.toFixed(2)}, ${lon.toFixed(2)}` };
-    })
+    return {...config.MOCK_DATA, city: `Coord: ${lat.toFixed(2)}, ${lon.toFixed(2)}` };
 
   } catch (error) {
     console.error("Eroare la obținerea vremii pentru coordonate:", error);

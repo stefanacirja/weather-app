@@ -9,12 +9,10 @@ import {
   clearInput
 } from './modules/ui-controller.js';
 
-// Validează orașul
 const isValidCity = (city) => {
   return city.length >= 2 && /^[a-zA-ZăâîșțĂÂÎȘȚ\s-]+$/.test(city);
 };
 
-// Handlere pentru căutare
 const handleSearch = async () => {
   const city = getCityInput();
 
@@ -39,10 +37,8 @@ const handleSearch = async () => {
 
 // Event listeners
 const setupEventListeners = () => {
-  // Clic pe buton
   elements.searchBtn.addEventListener('click', handleSearch);
 
-  // Apăsare Enter în input
   elements.cityInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -52,23 +48,21 @@ const setupEventListeners = () => {
 };
 
 const displayDefaultWeather = async () => {
-  const defaultCity = 'București';
 
-  showLoading();
+    showLoading();
 
-  try {
-    const data = await getCurrentWeather(defaultCity);
-    hideLoading();
-    displayWeather(data);
-  } catch (err) {
-    hideLoading();
-    showError(`Nu am putut încărca vremea pentru ${defaultCity}.`);
-    console.error(err);
-  }
+    try {
+        const data = await getCurrentWeather();
+        console.log(data)
+        hideLoading();
+        displayWeather(data);
+    } catch (err) {
+        hideLoading();
+        showError(`Nu am putut încărca vremea.`);
+        console.error(err);
+    }
 };
 
-
-// Inițializare aplicație
 const init = () => {
   setupEventListeners();
   displayDefaultWeather();
