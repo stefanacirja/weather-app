@@ -11,7 +11,9 @@ export const elements = {
   sunrise: document.querySelector('#sunrise'),
   sunset: document.querySelector('#sunset'),
   description: document.querySelector('#description'),
-  descriptionIcon: document.querySelector('#description-icon')
+  descriptionIcon: document.querySelector('#description-icon'),
+  unitSelector: document.querySelector('#unit-select'),
+  langSelector: document.querySelector('#lang-select')
 };
 
 export const showLoading = () => {

@@ -12,6 +12,30 @@
     <div id="app">
       <!-- Structura ta aici -->
        <div class="weather-app">
+            <div class="controls">
+                <div class="control-group">
+                    <label for="unit-select">Unitatea temperaturii:</label>
+                    <select id="unit-select">
+                        <option value="metric" selected>Celsius (°C)</option>
+                        <option value="imperial">Fahrenheit (°F)</option>
+                        <option value="standard">Kelvin (K)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="lang-select">Limba descrierilor:</label>
+                    <select id="lang-select">
+                        <option value="ro" selected>Română</option>
+                        <option value="en">Engleză</option>
+                        <option value="fr">Franceză</option>
+                        <option value="de">Germană</option>
+                        <option value="es">Spaniolă</option>
+                        <option value="it">Italiană</option>
+                        <option value="ru">Rusă</option>
+                        <option value="zh_cn">Chineză (Simplificată)</option>
+                    </select>
+                </div>
+            </div>
 
             <!-- Input + Buton -->
             <div class="input-container">
@@ -30,11 +54,13 @@
                 <h2 id="city-name">Oraș</h2>
                 <p><span id="description"></span></p>
                 <img src="" id="description-icon" alt="">
-                <p>🌡️ Temperatură: <span id="temperature"></span>°C</p>
-                <p>💧 Umiditate: <span id="humidity"></span>%</p>
-                <p>🌬️ Vânt: <span id="wind"></span> km/h</p>
-                <p>🌅 Răsărit: <span id="sunrise"></span></p>
-                <p>🌇 Apus: <span id="sunset"></span></p>
+                <div class="temp-data">
+                    <p><span>🌡️</span><span id="temperature"></span></p>
+                    <p><span>💧</span><span id="humidity"></span></p>
+                    <p><span>🌬️</span><span id="wind"></span></p>
+                    <p><span>🌅</span><span id="sunrise"></span></p>
+                    <p><span>🌇</span><span id="sunset"></span></p>
+                </div>
             </div>
         </div>
     </div>
