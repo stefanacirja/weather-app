@@ -16,7 +16,7 @@ const isValidCity = (city) => {
 const handleSearch = async () => {
   const city = getCityInput();
 
-  if (!isValidCity(city)) {
+  if (city && !isValidCity(city)) {
     showError('Introdu un oraș valid!');
     return;
   }
@@ -38,10 +38,11 @@ const handleSearch = async () => {
 // Event listeners
 const setupEventListeners = () => {
   elements.searchBtn.addEventListener('click', handleSearch);
+  elements.unitSelector.addEventListener('change', handleSearch);
+  elements.langSelector.addEventListener('change', handleSearch);
 
   elements.cityInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-      e.preventDefault();
       handleSearch();
     }
   });
@@ -53,7 +54,6 @@ const displayDefaultWeather = async () => {
 
     try {
         const data = await getCurrentWeather();
-        console.log(data)
         hideLoading();
         displayWeather(data);
     } catch (err) {
