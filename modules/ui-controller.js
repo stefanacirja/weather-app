@@ -13,7 +13,10 @@ export const elements = {
   description: document.querySelector('#description'),
   descriptionIcon: document.querySelector('#description-icon'),
   unitSelector: document.querySelector('#unit-select'),
-  langSelector: document.querySelector('#lang-select')
+  langSelector: document.querySelector('#lang-select'),
+  historySection: document.querySelector('#history-section'),
+  historyList: document.querySelector('#history-list'),
+  clearHistoryBtn: document.querySelector('#clear-history-btn'),
 };
 
 export const showLoading = () => {
@@ -50,3 +53,38 @@ export const getCityInput = () => elements.cityInput.value.trim();
 export const clearInput = () => {
   elements.cityInput.value = '';
 };
+
+export const renderHistory = (historyItems) => {
+  elements.historyList.innerHTML = '';
+
+  if (historyItems.length === 0) {
+    elements.historyList.innerHTML = '<div class="empty">Istoricul este gol.</div>';
+    return;
+  }
+
+  historyItems.forEach((item, index) => {
+    const div = document.createElement('div');
+    div.classList.add('history-item');
+    div.setAttribute('data-index', index);
+
+    div.innerHTML = `
+      <div class="city-info"><strong>${item.city}, ${item.country}</strong></div>
+      <div class="timestamp">${formatRelativeTime(item.timestamp)}</div>
+    `;
+
+    elements.historyList.appendChild(div);
+  });
+}
+
+export const formatRelativeTime = (timestamp) => {
+  const diff = Date.now() - timestamp;
+  const seconds = Math.floor(diff / 1000);
+
+  if (seconds < 60) return 'acum câteva secunde';
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes} minut${minutes === 1 ? '' : 'e'} în urmă`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} or${hours === 1 ? 'ă' : 'e'} în urmă`;
+  const days = Math.floor(hours / 24);
+  return `${days} zi${days === 1 ? '' : 'le'} în urmă`;
+}

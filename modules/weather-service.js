@@ -1,5 +1,6 @@
 import {CONFIG, API_ENDPOINTS} from './config.js';
 import {elements} from './ui-controller.js';
+import {historyService} from './history-service.js'
 
 const buildUrl = (endpoint, params) => {
     const url = new URL(`${CONFIG.API_URL}${endpoint}`);
@@ -53,6 +54,15 @@ export const getCurrentWeather = async (city) => {
                     metric: ' °C',
                     standard: ' K'
                 }
+
+                historyService.addLocation({
+                    city: data.name,
+                    country: data.sys.country,
+                    coordinates: {
+                        lat: data.coord.lat,
+                        lon: data.coord.lon
+                    }
+                })
 
                 return {
                     city: data.name,
