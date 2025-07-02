@@ -134,3 +134,17 @@ body {
     display: block;
     white-space: nowrap;
 }
+
+.history-section {
+  margin-top: 20px;
+}
+
+.history-item {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.clear-history-btn {
+  margin-top: 10px;
+}

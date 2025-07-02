@@ -1,4 +1,5 @@
 import { getCurrentWeather } from './modules/weather-service.js';
+import { historyService } from './modules/history-service.js';
 import {
   elements,
   showLoading,
@@ -6,7 +7,8 @@ import {
   showError,
   displayWeather,
   getCityInput,
-  clearInput
+  clearInput,
+  renderHistory
 } from './modules/ui-controller.js';
 
 const isValidCity = (city) => {
@@ -35,6 +37,24 @@ const handleSearch = async () => {
   }
 };
 
+export const onHistoryClick = async (index) => {
+  const history = historyService.getHistory();
+  const item = history[index];
+
+  if (!item) return;
+
+  try {
+    renderHistory(historyService.getHistory());
+  } catch (error) {
+    console.error('Eroare la reîncărcarea din istoric:', error);
+  }
+};
+
+export const onClearHistory = () => {
+  historyService.clearHistory();
+  renderHistory([]);
+};
+
 // Event listeners
 const setupEventListeners = () => {
   elements.searchBtn.addEventListener('click', handleSearch);
@@ -44,6 +64,20 @@ const setupEventListeners = () => {
   elements.cityInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       handleSearch();
+    }
+  });
+
+  elements.historyList.addEventListener('click', (event) => {
+    const item = event.target.closest('.history-item');
+    if (!item) return;
+
+    const index = parseInt(item.getAttribute('data-index'), 10);
+    onHistoryClick(index);
+  });
+
+  elements.clearHistoryBtn.addEventListener('click', () => {
+    if (confirm('Ești sigur că vrei să ștergi istoricul?')) {
+      onClearHistory();
     }
   });
 };
@@ -66,6 +100,7 @@ const displayDefaultWeather = async () => {
 const init = () => {
   setupEventListeners();
   displayDefaultWeather();
+  renderHistory(historyService.getHistory());
 };
 
 init();
