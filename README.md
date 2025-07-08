@@ -1,5 +1,7 @@
 # Weather App 🌦️
 
+[Repo pe GitHub](https://github.com/stefanacirja/weather-app) · [Demo live](https://stefanacirja.github.io/weather-app)
+
 O aplicație modernă pentru afișarea vremii în timp real, cu suport pentru căutare după oraș, geolocalizare, istoric căutări și cache inteligent pentru performanță sporită.
 
 ## 🚀 Funcționalități
