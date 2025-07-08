@@ -1,3 +1,5 @@
+const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+
 export const CONFIG = {
     API_KEY: '84ffbb09afa28c0d1d3fc8d4b42cf8ef',
     API_URL: 'https://api.openweathermap.org/data/2.5',
@@ -25,18 +27,4 @@ export const MESAGES = {
     CITY_NOT_FOUND: 'Orasul nu a putut fi gasit',
     NETWORK_ERROR: 'Conexiunea la internet a fost pierduta',
     NETWORK_BACK: 'Conexiunea a fost restabilita'
-}
-
-export const MOCK_DATA = {
-  name: "Oradea",
-  main: {
-    temp: 22,
-    humidity: 65
-  },
-  weather: [
-    { description: "senin" }
-  ],
-  wind: {
-    speed: 3.2
-  }
 };
